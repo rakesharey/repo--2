@@ -1,0 +1,36 @@
+
+#!C:\Users\Admin\AppData\Local\Programs\Python\Python37-32
+
+import smtplib
+import tkinter
+from tkinter import messagebox
+
+message = " Welcome list"
+
+def sendingmail():
+    #messagebox.showinfo("result",(e1.get(),e2.get()))
+    try:
+        mail = smtplib.SMTP("smtp.gmail.com",'587')
+        mail.ehlo()
+        mail.starttls()
+        mail.login("Email",'password')
+        mail.sendmail("Email",e1.get(),e2.get())
+        print("successfully sent mail")
+    except Exception as e:
+        print("Error:unable to send mail",e)
+    
+top = tkinter.Tk()    
+L=tkinter.Label(top,text="mail id").grid(row=0)
+L=tkinter.Label(top,text="message").grid(row=1)
+
+e1=tkinter.Entry(top)
+e2=tkinter.Entry(top)
+
+e1.grid(row=0, column=1)
+e2.grid(row=1, column=1)
+
+B=tkinter.Button(top,text="send",command=sendingmail).grid(row=3, column=0)
+B=tkinter.Button(top,text="quit",command=top.quit).grid(row=3, column=1)
+
+top.mainloop()
+
